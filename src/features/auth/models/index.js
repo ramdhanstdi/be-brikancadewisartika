@@ -1,3 +1,4 @@
+// Prisma
 const prisma = require("../../../helpers/prisma");
 
 exports.registerModel = async (data) => {
@@ -7,7 +8,7 @@ exports.registerModel = async (data) => {
       data: {
         email: data.email,
         password: data.password,
-        role_id: "ca7074e2-6094-4669-859e-59dd57ab0338",
+        role_id: 1,
         profile: {
           create: {
             fullname: data.fullname,
@@ -21,7 +22,20 @@ exports.registerModel = async (data) => {
     results.success = user;
     return results;
   } catch (error) {
-    console.log(error);
+    results.error = error;
+    return results;
+  }
+};
+
+exports.loginModel = async (data) => {
+  const results = {};
+  try {
+    const user = await prisma.users.findFirst({
+      where: { email: data.email },
+    });
+    results.success = user;
+    return results;
+  } catch (error) {
     results.error = error;
     return results;
   }

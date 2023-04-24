@@ -1,13 +1,23 @@
+// ENV
 require("dotenv").config();
-const express = require("express");
-const cors = require("cors");
-const app = express();
 const port = process.env.PORT;
 
+// Express
+const express = require("express");
+
+// CORS
+const cors = require("cors");
+
+const app = express();
 app.use(express.urlencoded({ extended: false }));
+
+// CORS
 app.use(cors());
+
+// Route Index
 app.use("/api/v1", require("./src/routes"));
 
+// Route default
 app.get("/", (req, res) => {
   return res.json({
     success: true,
@@ -15,6 +25,7 @@ app.get("/", (req, res) => {
   });
 });
 
+// Route not found
 app.use("*", (req, res) => {
   return res.status(404).json({
     success: false,
@@ -22,6 +33,7 @@ app.use("*", (req, res) => {
   });
 });
 
+// Listen
 app.listen(port, () => {
   console.log(`App Run In Port ${port}`);
 });

@@ -1,8 +1,15 @@
+// Express Validator
 const { body } = require("express-validator");
+
+// Bcrypt
 const bcrypt = require("bcrypt");
 
 const authSchema = [
-  body("email").notEmpty().isEmail().withMessage("Wrong Email Format").escape(),
+  body("email")
+    .notEmpty()
+    .isLength({ min: 6 })
+    .withMessage("Must be min 6 character")
+    .escape(),
   body("password")
     .notEmpty()
     .isLength({ min: 6 })
