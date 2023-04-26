@@ -5,7 +5,7 @@ const { body } = require("express-validator");
 const bcrypt = require("bcrypt");
 
 const authSchema = [
-  body("email")
+  body("username")
     .notEmpty()
     .isLength({ min: 6 })
     .withMessage("Must be min 6 character")

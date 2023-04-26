@@ -12,7 +12,7 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
 exports.registerUser = async (req, res) => {
-  const results = await registerModel(req.body);
+  const results = await registerModel(req.body, req.file.result.id);
   if (results.error) {
     return errorResponse(results.error, res);
   }

@@ -2,6 +2,9 @@
 require("dotenv").config();
 const port = process.env.PORT;
 
+// Body Parser
+const bodyParser = require("body-parser");
+
 // Express
 const express = require("express");
 
@@ -9,10 +12,20 @@ const express = require("express");
 const cors = require("cors");
 
 const app = express();
+
+// parse application/json
+app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: false }));
 
 // CORS
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:5000",
+    credentials: true,
+  })
+);
+
+app.options("*", cors()); // enable pre-flight request for all routes
 
 // Route Index
 app.use("/api/v1", require("./src/routes"));

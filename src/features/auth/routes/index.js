@@ -9,8 +9,15 @@ const authSchema = require("../validation");
 
 // Middleware validation
 const validation = require("../../../middleware/validation");
+const uploader = require("../../../middleware/uploader");
 
-auth.post("/register", authSchema, validation, authController.registerUser);
+auth.post(
+  "/register",
+  uploader,
+  authSchema,
+  validation,
+  authController.registerUser
+);
 auth.post("/login", authController.loginUser);
 
 module.exports = auth;

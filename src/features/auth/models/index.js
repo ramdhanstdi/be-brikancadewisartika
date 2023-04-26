@@ -1,17 +1,18 @@
 // Prisma
 const prisma = require("../../../helpers/prisma");
 
-exports.registerModel = async (data) => {
+exports.registerModel = async (data, image) => {
   const results = {};
   try {
     const user = await prisma.users.create({
       data: {
-        email: data.email,
+        username: data.username,
         password: data.password,
-        role_id: 1,
+        role_id: data.role_id || 0,
         profile: {
           create: {
             fullname: data.fullname,
+            image_url: image,
           },
         },
       },
@@ -31,7 +32,7 @@ exports.loginModel = async (data) => {
   const results = {};
   try {
     const user = await prisma.users.findFirst({
-      where: { email: data.email },
+      where: { username: data.username },
     });
     results.success = user;
     return results;
