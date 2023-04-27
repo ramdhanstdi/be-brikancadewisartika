@@ -43,5 +43,6 @@ model users {
   username   String    @unique(map: "users_email_key") @db.VarChar
   password   String    @db.VarChar
   role_id    Int       @db.SmallInt
+  pn         String?   @unique @db.VarChar
   profile    profile[]
 }

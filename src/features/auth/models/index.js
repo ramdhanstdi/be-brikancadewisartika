@@ -9,6 +9,7 @@ exports.registerModel = async (data, image) => {
         username: data.username,
         password: data.password,
         role_id: data.role_id || 0,
+        pn: data.pn,
         profile: {
           create: {
             fullname: data.fullname,
