@@ -11,7 +11,13 @@ const express = require("express");
 // CORS
 const cors = require("cors");
 
+// Cookie
+const cookieParser = require("cookie-parser");
+
 const app = express();
+
+// Cookie
+app.use(cookieParser());
 
 // parse application/json
 app.use(bodyParser.json());
