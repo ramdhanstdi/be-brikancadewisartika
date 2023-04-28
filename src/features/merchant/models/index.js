@@ -27,3 +27,26 @@ exports.createModel = async (data, user, image) => {
     return results;
   }
 };
+
+exports.readModel = async (data) => {
+  const results = {};
+  try {
+    const merchant = await prisma.merchant.findMany({
+      where: {
+        created_at: {
+          gte: new Date(new Date(data.date).setHours(0, 0, 0, 0)),
+          lte: new Date(data.date),
+        },
+      },
+      include: {
+        profile: { select: { profile: { select: { fullname: true } } } },
+      },
+    });
+    results.success = merchant;
+    return results;
+  } catch (error) {
+    console.log(error);
+    results.error = error;
+    return results;
+  }
+};

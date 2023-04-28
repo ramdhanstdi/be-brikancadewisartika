@@ -7,6 +7,10 @@ const errorResponse = (err, res) => {
     const resErr = handleError("Username Already Use", "username");
     return response(res, "Username sudah digunakan", resErr, null, 400);
   }
+  if (err.code === "P2002" && err.meta.target[0] === "pn") {
+    const resErr = handleError("Username Already Use", "pn");
+    return response(res, "PN sudah digunakan", resErr, null, 400);
+  }
 };
 
 module.exports = errorResponse;

@@ -9,5 +9,6 @@ const authorization = require("../../../middleware/authentication");
 const uploader = require("../../../middleware/uploader");
 
 form.post("/create", authorization, uploader, formController.createController);
+form.get("/monitoring", authorization, formController.monitoringController);
 
 module.exports = form;

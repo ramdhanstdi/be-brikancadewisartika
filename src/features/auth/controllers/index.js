@@ -33,7 +33,7 @@ exports.loginUser = async (req, res) => {
     .then((cpres) => {
       if (cpres) {
         const token = jwt.sign(
-          { id: user.id },
+          { id: user.id, role: user.role_id },
           process.env.APP_KEY || "k4Aul4h",
           { expiresIn: "12h" }
         );

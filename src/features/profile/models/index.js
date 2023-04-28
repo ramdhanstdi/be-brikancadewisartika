@@ -10,7 +10,6 @@ exports.getDetailModel = async (data) => {
       },
       select: {
         fullname: true,
-        merchant: true,
         users: { select: { role_id: true } },
       },
     });
