@@ -10,5 +10,6 @@ const uploader = require("../../../middleware/uploader");
 
 form.post("/create", authorization, uploader, formController.createController);
 form.get("/monitoring", authorization, formController.monitoringController);
+form.get("/list", formController.listMerchant);
 
 module.exports = form;

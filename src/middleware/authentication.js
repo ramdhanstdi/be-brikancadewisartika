@@ -5,7 +5,7 @@ const jwt = require("jsonwebtoken");
 const successResponse = require("../helpers/successResponse");
 
 const authorization = (req, res, next) => {
-  if (req.cookies.token.split('"')[3]) {
+  if (req.cookies.token) {
     const auth = req.cookies.token.split('"')[3];
     try {
       const result = jwt.verify(auth, process.env.APP_KEY || "k4Aul4h");

@@ -1,5 +1,5 @@
 // Models
-const { createModel, readModel } = require("../models");
+const { createModel, readModel, listModel } = require("../models");
 
 // Helper Response
 const errorResponse = require("../../../helpers/errorResponse");
@@ -15,6 +15,14 @@ exports.createController = async (req, res) => {
 
 exports.monitoringController = async (req, res) => {
   const result = await readModel(req.query);
+  if (result.error) {
+    return errorResponse(result.error, res);
+  }
+  return successResponse(res, "Show all Data", result.success);
+};
+
+exports.listMerchant = async (req, res) => {
+  const result = await listModel(req.query);
   if (result.error) {
     return errorResponse(result.error, res);
   }
