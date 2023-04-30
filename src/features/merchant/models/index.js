@@ -55,6 +55,14 @@ exports.listModel = async (data) => {
   const results = {};
   try {
     const page = data.page ? data.page : 0;
+    const totalData = await prisma.merchant.count({
+      where: {
+        created_at: {
+          gte: new Date(data.fromDate),
+          lte: new Date(data.toDate),
+        },
+      },
+    });
     const merchant = await prisma.merchant.findMany({
       skip: parseInt(page) * 10,
       take: 10,
@@ -67,8 +75,10 @@ exports.listModel = async (data) => {
       include: {
         profile: { select: { profile: { select: { fullname: true } } } },
       },
+      orderBy: { created_at: "desc" },
     });
     results.success = merchant;
+    results.totalData = totalData;
     return results;
   } catch (error) {
     console.log(error);
