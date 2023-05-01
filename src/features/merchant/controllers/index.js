@@ -1,5 +1,5 @@
 // Models
-const { createModel, readModel, listModel } = require("../models");
+const { createModel, readModel, listModel, editModel } = require("../models");
 
 // Helper Response
 const errorResponse = require("../../../helpers/errorResponse");
@@ -11,6 +11,14 @@ exports.createController = async (req, res) => {
     return errorResponse(result.error, res);
   }
   return successResponse(res, "Data has been saved", result.success);
+};
+
+exports.editController = async (req, res) => {
+  const result = await editModel(req.body, req.user, req.file.result.id);
+  if (result.error) {
+    return errorResponse(result.error, res);
+  }
+  return successResponse(res, "Data has been update", result.success);
 };
 
 exports.monitoringController = async (req, res) => {

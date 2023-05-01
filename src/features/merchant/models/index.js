@@ -28,6 +28,33 @@ exports.createModel = async (data, user, image) => {
   }
 };
 
+exports.editModel = async (data, image) => {
+  const results = {};
+  try {
+    const merchant = await prisma.merchant.update({
+      where: { id: data.id },
+      data: {
+        grup_area: data.grup_area,
+        address: data.address,
+        category: data.category,
+        conclusion: data.conclusion,
+        lat: data.lat,
+        lng: data.lng,
+        name_merchant: data.name_merchant,
+        rating: data.rating,
+        realitaion_date: new Date(parseInt(data.realitaion_date)),
+        url_image: image,
+        visit_date: new Date(parseInt(data.visit_date)),
+      },
+    });
+    results.success = merchant;
+    return results;
+  } catch (error) {
+    results.error = error;
+    return results;
+  }
+};
+
 exports.readModel = async (data) => {
   const results = {};
   try {
@@ -35,7 +62,7 @@ exports.readModel = async (data) => {
       where: {
         created_at: {
           gte: new Date(new Date(data.date).setHours(0, 0, 0, 0)),
-          lte: new Date(data.date),
+          lte: new Date(new Date(data.date).setHours(23, 59, 59, 0)),
         },
       },
       include: {
@@ -45,7 +72,6 @@ exports.readModel = async (data) => {
     results.success = merchant;
     return results;
   } catch (error) {
-    console.log(error);
     results.error = error;
     return results;
   }
@@ -57,9 +83,9 @@ exports.listModel = async (data) => {
     const page = data.page ? data.page : 0;
     const totalData = await prisma.merchant.count({
       where: {
-        created_at: {
-          gte: new Date(data.fromDate),
-          lte: new Date(data.toDate),
+        visit_date: {
+          gte: new Date(new Date(data.fromDate).setHours(0, 0, 0, 0)),
+          lte: new Date(new Date(data.toDate).setHours(23, 59, 59, 0)),
         },
       },
     });
@@ -67,9 +93,9 @@ exports.listModel = async (data) => {
       skip: parseInt(page) * 10,
       take: 10,
       where: {
-        created_at: {
-          gte: new Date(data.fromDate),
-          lte: new Date(data.toDate),
+        visit_date: {
+          gte: new Date(new Date(data.fromDate).setHours(0, 0, 0, 0)),
+          lte: new Date(new Date(data.toDate).setHours(23, 59, 59, 0)),
         },
       },
       include: {
@@ -81,7 +107,6 @@ exports.listModel = async (data) => {
     results.totalData = totalData;
     return results;
   } catch (error) {
-    console.log(error);
     results.error = error;
     return results;
   }
