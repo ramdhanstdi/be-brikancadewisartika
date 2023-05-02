@@ -12,6 +12,9 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
 exports.registerUser = async (req, res) => {
+  if (req.file.path) {
+    return successResponse(res, "Image is required", null, null, 400);
+  }
   const results = await registerModel(req.body, req.file.path);
   if (results.error) {
     return errorResponse(results.error, res);
