@@ -16,6 +16,8 @@ const cookieParser = require("cookie-parser");
 
 const app = express();
 
+app.use("/uploads", express.static("uploads"));
+
 // Cookie
 app.use(cookieParser());
 

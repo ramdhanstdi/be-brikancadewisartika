@@ -1,4 +1,4 @@
-const uploadsfile = require("../helpers/uploadfile");
+const uploadsfile = require("../helpers/uploadLocal");
 
 const uploader = (req, res, next) => {
   const upload = uploadsfile.single("images");

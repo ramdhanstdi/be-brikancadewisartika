@@ -13,7 +13,7 @@ exports.registerModel = async (data, image) => {
         profile: {
           create: {
             fullname: data.fullname,
-            image_url: image,
+            image_url: process.env.RUNNING_APP + image,
           },
         },
       },

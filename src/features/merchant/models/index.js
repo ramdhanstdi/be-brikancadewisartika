@@ -15,7 +15,7 @@ exports.createModel = async (data, user, image) => {
         name_merchant: data.name_merchant,
         rating: data.rating,
         realitaion_date: new Date(parseInt(data.realitaion_date)),
-        url_image: image,
+        url_image: process.env.RUNNING_APP + image,
         visit_date: new Date(parseInt(data.visit_date)),
         profile_id: user.id,
       },
@@ -43,7 +43,7 @@ exports.editModel = async (data, image) => {
         name_merchant: data.name_merchant,
         rating: data.rating,
         realitaion_date: new Date(parseInt(data.realitaion_date)),
-        url_image: image,
+        url_image: process.env.RUNNING_APP + image,
         visit_date: new Date(parseInt(data.visit_date)),
       },
     });
@@ -66,7 +66,9 @@ exports.readModel = async (data) => {
         },
       },
       include: {
-        profile: { select: { profile: { select: { fullname: true } } } },
+        profile: {
+          select: { profile: { select: { fullname: true, image_url: true } } },
+        },
       },
     });
     results.success = merchant;
