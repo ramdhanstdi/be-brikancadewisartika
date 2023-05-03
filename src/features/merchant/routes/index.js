@@ -14,20 +14,20 @@ const validation = require("../../../middleware/validation");
 
 form.post(
   "/create",
+  uploader,
   merchantSchema,
   validation,
   authorization,
-  uploader,
   formController.createController
 );
 form.get("/monitoring", authorization, formController.monitoringController);
 form.get("/list", authorization, formController.listMerchant);
 form.post(
   "/edit",
+  uploader,
   merchantSchema,
   validation,
   authorization,
-  uploader,
   formController.editController
 );
 

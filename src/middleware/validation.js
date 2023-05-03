@@ -7,7 +7,7 @@ const { validationResult } = require("express-validator");
 const validation = (req, res, next) => {
   const error = validationResult(req);
   if (!error.isEmpty()) {
-    return successResponse(res, "Error Accured", error.array(), null, 400);
+    return successResponse(res, "Data Belum Lengkap", error.array(), null, 400);
   }
   next();
 };

@@ -6,7 +6,7 @@ const errorResponse = require("../../../helpers/errorResponse");
 const successResponse = require("../../../helpers/successResponse");
 
 exports.createController = async (req, res) => {
-  if (req.file.path) {
+  if (!req.file.path) {
     return successResponse(res, "Image is required", null, null, 400);
   }
   const result = await createModel(req.body, req.user, req.file.path);
@@ -17,7 +17,7 @@ exports.createController = async (req, res) => {
 };
 
 exports.editController = async (req, res) => {
-  if (req.file.path) {
+  if (!req.file.path) {
     return successResponse(res, "Image is required", null, null, 400);
   }
   const result = await editModel(req.body, req.file.path);
