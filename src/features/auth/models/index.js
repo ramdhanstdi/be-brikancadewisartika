@@ -8,7 +8,7 @@ exports.registerModel = async (data, image) => {
       data: {
         username: data.username,
         password: data.password,
-        role_id: data.role_id ? parseInt(data.role_id) : 0,
+        role_id: data.role_id ? 1 : 0,
         pn: data.pn,
         profile: {
           create: {
