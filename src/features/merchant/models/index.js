@@ -113,3 +113,41 @@ exports.listModel = async (data) => {
     return results;
   }
 };
+
+exports.listByIdModel = async (data, user) => {
+  const results = {};
+  try {
+    const page = data.page ? data.page : 0;
+    const totalData = await prisma.merchant.count({
+      where: {
+        profile_id: user.id,
+        visit_date: {
+          gte: new Date(new Date(data.fromDate).setHours(0, 0, 0, 0)),
+          lte: new Date(new Date(data.toDate).setHours(23, 59, 59, 0)),
+        },
+      },
+    });
+    const merchant = await prisma.merchant.findMany({
+      skip: parseInt(page) * 10,
+      take: 10,
+      where: {
+        profile_id: user.id,
+        visit_date: {
+          gte: new Date(new Date(data.fromDate).setHours(0, 0, 0, 0)),
+          lte: new Date(new Date(data.toDate).setHours(23, 59, 59, 0)),
+        },
+      },
+      include: {
+        profile: { select: { profile: { select: { fullname: true } } } },
+      },
+      orderBy: { created_at: "desc" },
+    });
+    results.success = merchant;
+    results.totalData = totalData;
+    return results;
+  } catch (error) {
+    console.log(error);
+    results.error = error;
+    return results;
+  }
+};

@@ -22,6 +22,7 @@ form.post(
 );
 form.get("/monitoring", authorization, formController.monitoringController);
 form.get("/list", authorization, formController.listMerchant);
+form.get("/listbyid", authorization, formController.listByIdMerchant);
 form.post(
   "/edit",
   uploader,
