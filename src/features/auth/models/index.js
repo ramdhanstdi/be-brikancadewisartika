@@ -8,7 +8,7 @@ exports.registerModel = async (data, image) => {
       data: {
         username: data.username,
         password: data.password,
-        role_id: data.role_id || 0,
+        role_id: data.role_id ? parseInt(data.role_id) : 0,
         pn: data.pn,
         profile: {
           create: {
@@ -24,6 +24,7 @@ exports.registerModel = async (data, image) => {
     results.success = user;
     return results;
   } catch (error) {
+    console.log(error);
     results.error = error;
     return results;
   }
