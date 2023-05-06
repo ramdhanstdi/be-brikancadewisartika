@@ -28,12 +28,20 @@ app.use(express.urlencoded({ extended: false }));
 // CORS
 app.use(
   cors({
-    origin: "http://localhost:5000",
+    origin: [
+      "http://localhost:3000",
+      "http://localhost:3001",
+      "http://localhost:5000",
+      "http://localhost:5001",
+      "http://brikancadewisartika.co.id",
+      "http://brikancadewisartika.co.id/",
+    ],
+    methods: "GET,POST,PUT,DELETE",
     credentials: true,
   })
 );
 
-app.options("*", cors()); // enable pre-flight request for all routes
+// app.options("*", cors()); enable pre-flight request for all routes
 
 // Route Index
 app.use("/api/v1", require("./src/routes"));
