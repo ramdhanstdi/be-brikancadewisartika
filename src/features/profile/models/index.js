@@ -14,10 +14,8 @@ exports.getDetailModel = async (data) => {
       },
     });
     results.success = profile;
-
     return results;
   } catch (error) {
-    console.log(error);
     results.error = error;
     return results;
   }

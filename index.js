@@ -29,12 +29,14 @@ app.use(express.urlencoded({ extended: false }));
 app.use(
   cors({
     origin: [
+      "http://192.168.18.7:5005",
+      "http://192.168.18.7:5005/",
       "http://localhost:3000",
       "http://localhost:3001",
       "http://localhost:5000",
       "http://localhost:5001",
-      "http://brikancadewisartika.co.id",
-      "http://brikancadewisartika.co.id/",
+      "https://brikancadewisartika.co.id",
+      "https://brikancadewisartika.co.id/",
     ],
     methods: "GET,POST,PUT,DELETE",
     credentials: true,

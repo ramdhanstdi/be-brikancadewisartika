@@ -27,7 +27,7 @@ exports.loginUser = async (req, res) => {
   if (results.error) {
     return errorResponse(results.error, res);
   }
-  if (results.success.length < 1) {
+  if (results.success === null) {
     return successResponse(res, "Wrong Email or Password", null, null, 400);
   }
   const user = results.success;

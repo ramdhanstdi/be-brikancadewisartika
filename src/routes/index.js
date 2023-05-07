@@ -5,5 +5,6 @@ router.use("/auth", require("../features/auth/routes"));
 router.use("/merchant", require("../features/merchant/routes"));
 router.use("/profile", require("../features/profile/routes"));
 router.use("/dropbox", require("../helpers/dropbox"));
+router.use("/user", require("../features/users/routes"));
 
 module.exports = router;
