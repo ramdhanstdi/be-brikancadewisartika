@@ -11,7 +11,7 @@ const errorResponse = (err, res) => {
     const resErr = handleError("Username Already Use", "pn");
     return response(res, "PN sudah digunakan", resErr, null, 400);
   }
-  return response(res, "Error Server", resErr, null, 400);
+  return response(res, "Error Server", null, null, 400);
 };
 
 module.exports = errorResponse;

@@ -34,7 +34,7 @@ exports.editController = async (req, res) => {
 };
 
 exports.monitoringController = async (req, res) => {
-  const result = await readModel(req.query);
+  const result = await readModel();
   if (result.error) {
     return errorResponse(result.error, res);
   }

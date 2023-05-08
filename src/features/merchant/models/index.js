@@ -55,16 +55,10 @@ exports.editModel = async (data, image) => {
   }
 };
 
-exports.readModel = async (data) => {
+exports.readModel = async () => {
   const results = {};
   try {
     const merchant = await prisma.merchant.findMany({
-      where: {
-        created_at: {
-          gte: new Date(new Date(data.date).setHours(0, 0, 0, 0)),
-          lte: new Date(new Date(data.date).setHours(23, 59, 59, 0)),
-        },
-      },
       include: {
         profile: {
           select: { profile: { select: { fullname: true, image_url: true } } },
